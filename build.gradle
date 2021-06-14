@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id "application"
+}
+
+apply plugin : "java"
+ext{
+    javaMainClass = "Main"
+}
+
+group 'br.com.pong'
+version '1.0-SNAPSHOT'
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile files("lib/class")
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+application{
+    mainClassName = javaMainClass
+}
+
+
