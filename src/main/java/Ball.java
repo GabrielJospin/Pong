@@ -20,10 +20,21 @@ public class Ball {
 		@param speed velocidade da bola (em pixels por millisegundo).
 	*/
 
-	public Ball(double cx, double cy, double width, double height, Color color, double speed){
-	
-	}
+	double cx;
+	double cy;
+	double width;
+	double height;
+	Color color;
+	double speed;
 
+	public Ball(double cx, double cy, double width, double height, Color color, double speed) {
+		this.cx = cx;
+		this.cy = cy;
+		this.width = width;
+		this.height = height;
+		this.color = color;
+		this.speed = speed;
+	}
 
 	/**
 		Método chamado sempre que a bola precisa ser (re)desenhada.
@@ -96,7 +107,7 @@ public class Ball {
 	
 	public double getCx(){
 
-		return 400;
+		return this.cx;
 	}
 
 	/**
@@ -106,7 +117,7 @@ public class Ball {
 
 	public double getCy(){
 
-		return 300;
+		return this.cy;
 	}
 
 	/**
@@ -117,7 +128,7 @@ public class Ball {
 
 	public double getSpeed(){
 
-		return 0;
+		return this.speed;
 	}
 
 }
