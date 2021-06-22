@@ -58,7 +58,8 @@ public class Player {
 	*/
 
 	public void moveUp(long delta){
-
+		double move = delta*speed;
+		this.cy = cy + move;
 	}
 
 	/**
@@ -70,7 +71,8 @@ public class Player {
 	*/
 
 	public void moveDown(long delta){
-
+		double move = delta*speed;
+		this.cy = cy - move;
 	}
 
 	/**
