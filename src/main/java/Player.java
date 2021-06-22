@@ -45,8 +45,8 @@ public class Player {
 
 	public void draw(){
 
-		GameLib.setColor(Color.GREEN);
-		GameLib.fillRect(80, 300, 20, 100);
+		GameLib.setColor(this.color);
+		GameLib.fillRect(this.cx, this.cy, this.width, this.height);
 	}
 
 	/**
