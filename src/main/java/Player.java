@@ -19,14 +19,14 @@ public class Player {
 		@param v_limit um array de double contendo dois valores (em pixels) que determinam os limites verticais da área útil da quadra.   
 		@param speed velocidade do movimento vertical do player (em pixels por millisegundo).
 	*/
-	double cx;
-	double cy;
-	double width;
-	double height;
-	Color color;
-	String id;
-	double[] v_limit;
-	double speed;
+	private double cx;
+	private double cy;
+	private double width;
+	private double height;
+	private Color color;
+	private String id;
+	private double[] v_limit;
+	private double speed;
 
 	public Player(double cx, double cy, double width, double height, Color color, String id, double[] v_limit, double speed) {
 		this.cx = cx;
