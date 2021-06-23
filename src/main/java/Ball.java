@@ -25,7 +25,8 @@ public class Ball {
 	double width;
 	double height;
 	Color color;
-	double speed;
+	double speedX;
+	double speedY;
 
 	public Ball(double cx, double cy, double width, double height, Color color, double speed) {
 		this.cx = cx;
@@ -33,7 +34,8 @@ public class Ball {
 		this.width = width;
 		this.height = height;
 		this.color = color;
-		this.speed = speed;
+		this.speedX = speed;
+		this.speedY = speed;
 	}
 
 	/**
@@ -42,8 +44,8 @@ public class Ball {
 
 	public void draw(){
 
-		GameLib.setColor(Color.YELLOW);
-		GameLib.fillRect(400, 300, 20, 20);
+		GameLib.setColor(this.color);
+		GameLib.fillRect(this.cx, this.cy, this.width, this.height);
 	}
 
 	/**
@@ -52,8 +54,11 @@ public class Ball {
 		@param delta quantidade de millisegundos que se passou entre o ciclo anterior de atualização do jogo e o atual.
 	*/
 
-	public void update(long delta){
-
+	public void update(long delta) {
+		double moveX = this.speedX * delta;
+		double moveY = this.speedY * delta;
+		this.cx = cx + moveX;
+		this.cy = cy + moveY;
 	}
 
 	/**
@@ -63,7 +68,8 @@ public class Ball {
 	*/
 
 	public void onPlayerCollision(String playerId){
-
+		this.speedX = -this.speedX;
+		this.speedY = -this.speedY;
 	}
 
 	/**
@@ -73,7 +79,10 @@ public class Ball {
 	*/
 
 	public void onWallCollision(String wallId){
-
+		if(wallId.toLowerCase().equals("left") || wallId.toLowerCase().equals("right"))
+			this.speedX = -this.speedX;
+		else
+			this.speedY = -this.speedY;
 	}
 
 	/**
@@ -84,7 +93,16 @@ public class Ball {
 	*/
 	
 	public boolean checkCollision(Wall wall){
+		if(wall.getId().toLowerCase().equals("left"))
+			return this.cx - wall.getWidth() <= wall.getCx();
+		if(wall.getId().toLowerCase().equals("right"))
+			return this.cx + wall.getWidth() >= wall.getCx();
+		if(wall.getId().toLowerCase().equals("top"))
+			return this.cy - wall.getHeight() <= wall.getCy();
+		if(wall.getId().toLowerCase().equals("bottom"))
+			return this.cy + wall.getHeight() >= wall.getCy();
 
+		System.out.println("Wall id ="+wall.getId());
 		return false;
 	}
 
@@ -96,8 +114,16 @@ public class Ball {
 	*/	
 
 	public boolean checkCollision(Player player){
+		if(this.cy + this.height/2 <= player.getCy() - player.getHeight()/2)
+			return false;
+		if(this.cy - this.height/2 >= player.getCy() + player.getHeight()/2)
+			return false;
+		if(this.cx + this.width/2 <= player.getCx() - player.getWidth()/2)
+			return false;
+		if(this.cx - this.width/2 >= player.getCx() + player.getWidth()/2)
+			return false;
 
-		return false;
+		return true;
 	}
 
 	/**
@@ -128,7 +154,7 @@ public class Ball {
 
 	public double getSpeed(){
 
-		return this.speed;
+		return this.speedX;
 	}
 
 }
