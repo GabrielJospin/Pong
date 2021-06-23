@@ -46,6 +46,7 @@ public class Score {
 	*/
 
 	public void inc(){
+		this.score++;
 	}
 
 	/**
