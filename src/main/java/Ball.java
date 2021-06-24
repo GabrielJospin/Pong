@@ -27,6 +27,7 @@ public class Ball {
 	Color color;
 	double speedX;
 	double speedY;
+	String lastCollisionId;
 
 	public Ball(double cx, double cy, double width, double height, Color color, double speed) {
 		this.cx = cx;
@@ -34,8 +35,9 @@ public class Ball {
 		this.width = width;
 		this.height = height;
 		this.color = color;
-		this.speedX = speed;
-		this.speedY = speed;
+		this.speedX = 0.1;
+		this.speedY = 0.1;
+		lastCollisionId = "\0";
 	}
 
 	/**
@@ -43,7 +45,6 @@ public class Ball {
 	*/
 
 	public void draw(){
-
 		GameLib.setColor(this.color);
 		GameLib.fillRect(this.cx, this.cy, this.width, this.height);
 	}
@@ -68,8 +69,11 @@ public class Ball {
 	*/
 
 	public void onPlayerCollision(String playerId){
+		if(playerId.toLowerCase().equals(lastCollisionId.toLowerCase()))
+			return;
+
 		this.speedX = -this.speedX;
-		this.speedY = -this.speedY;
+		this.lastCollisionId = playerId;
 	}
 
 	/**
@@ -79,6 +83,8 @@ public class Ball {
 	*/
 
 	public void onWallCollision(String wallId){
+
+		this.lastCollisionId = wallId;
 		if(wallId.toLowerCase().equals("left") || wallId.toLowerCase().equals("right"))
 			this.speedX = -this.speedX;
 		else
@@ -94,13 +100,13 @@ public class Ball {
 	
 	public boolean checkCollision(Wall wall){
 		if(wall.getId().toLowerCase().equals("left"))
-			return this.cx - wall.getWidth() <= wall.getCx();
+			return this.cx - this.width/2 <= wall.getCx() + wall.getWidth()/2;
 		if(wall.getId().toLowerCase().equals("right"))
-			return this.cx + wall.getWidth() >= wall.getCx();
+			return this.cx + this.width/2  >= wall.getCx() - wall.getWidth()/2;
 		if(wall.getId().toLowerCase().equals("top"))
-			return this.cy - wall.getHeight() <= wall.getCy();
+			return this.cy - this.height/2  <= wall.getCy() + wall.getHeight()/2;
 		if(wall.getId().toLowerCase().equals("bottom"))
-			return this.cy + wall.getHeight() >= wall.getCy();
+			return this.cy + this.height/2  >= wall.getCy() - wall.getHeight()/2;
 
 		System.out.println("Wall id ="+wall.getId());
 		return false;
@@ -157,4 +163,17 @@ public class Ball {
 		return this.speedX;
 	}
 
+	@Override
+	public String toString() {
+		return "Ball{" +
+				"cx=" + cx +
+				", cy=" + cy +
+				", width=" + width +
+				", height=" + height +
+				", color=" + color +
+				", speedX=" + speedX +
+				", speedY=" + speedY +
+				", lastCollisionId='" + lastCollisionId + '\'' +
+				'}';
+	}
 }
