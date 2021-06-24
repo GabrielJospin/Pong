@@ -35,8 +35,8 @@ public class Ball {
 		this.width = width;
 		this.height = height;
 		this.color = color;
-		this.speedX = 0.1;
-		this.speedY = 0.1;
+		this.speedX = speed;
+		this.speedY = speed;
 		lastCollisionId = "\0";
 	}
 
@@ -69,7 +69,7 @@ public class Ball {
 	*/
 
 	public void onPlayerCollision(String playerId){
-		if(playerId.toLowerCase().equals(lastCollisionId.toLowerCase()))
+		if(compareString(playerId,lastCollisionId))
 			return;
 
 		this.speedX = -this.speedX;
@@ -85,7 +85,7 @@ public class Ball {
 	public void onWallCollision(String wallId){
 
 		this.lastCollisionId = wallId;
-		if(wallId.toLowerCase().equals("left") || wallId.toLowerCase().equals("right"))
+		if(compareString(wallId,"left") || compareString(wallId,"right"))
 			this.speedX = -this.speedX;
 		else
 			this.speedY = -this.speedY;
@@ -99,13 +99,16 @@ public class Ball {
 	*/
 	
 	public boolean checkCollision(Wall wall){
-		if(wall.getId().toLowerCase().equals("left"))
+
+		String wallId = wall.getId();
+
+		if(compareString(wallId,"Left"))
 			return this.cx - this.width/2 <= wall.getCx() + wall.getWidth()/2;
-		if(wall.getId().toLowerCase().equals("right"))
+		if(compareString(wallId,"Right"))
 			return this.cx + this.width/2  >= wall.getCx() - wall.getWidth()/2;
-		if(wall.getId().toLowerCase().equals("top"))
+		if(compareString(wallId,"Top"))
 			return this.cy - this.height/2  <= wall.getCy() + wall.getHeight()/2;
-		if(wall.getId().toLowerCase().equals("bottom"))
+		if(compareString(wallId,"Bottom"))
 			return this.cy + this.height/2  >= wall.getCy() - wall.getHeight()/2;
 
 		System.out.println("Wall id ="+wall.getId());
@@ -161,6 +164,10 @@ public class Ball {
 	public double getSpeed(){
 
 		return this.speedX;
+	}
+
+	private boolean compareString(String original, String comparative){
+		return original.toLowerCase().equals(comparative.toLowerCase());
 	}
 
 	@Override
