@@ -57,6 +57,6 @@ public class Score {
 
 	public int getScore(){
 
-		return 0;
+		return this.score;
 	}
 }
