@@ -156,7 +156,7 @@ public class Ball {
 	}
 
 	/**
-		Método que devolve a velocidade da bola.
+		Método que devolve a velocidade da bola na direção X.
 		@return o valor double da velocidade.
 
 	*/
@@ -164,6 +164,17 @@ public class Ball {
 	public double getSpeed(){
 
 		return this.speedX;
+	}
+
+	/**
+	 Método que devolve a velocidade da bola na direção Y.
+	 @return o valor double da velocidade.
+
+	 */
+
+	public double getSpeedY(){
+
+		return this.speedY;
 	}
 
 	private boolean compareString(String original, String comparative){
