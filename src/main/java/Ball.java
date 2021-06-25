@@ -84,6 +84,9 @@ public class Ball {
 
 	public void onWallCollision(String wallId){
 
+		if(compareString(wallId,lastCollisionId))
+			return;
+
 		this.lastCollisionId = wallId;
 		if(compareString(wallId,"left") || compareString(wallId,"right"))
 			this.speedX = -this.speedX;
