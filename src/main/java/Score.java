@@ -14,10 +14,10 @@ public class Score {
 		@param playerId uma string que identifica o player ao qual este placar está associado.
 	*/
 
-	String playerId;
-	int score;
-	int align;
-	Color color;
+	private String playerId;
+	private int score;
+	private int align;
+	private Color color;
 
 	public Score(String playerId) {
 		this.playerId = playerId;
