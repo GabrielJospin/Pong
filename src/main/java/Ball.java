@@ -20,14 +20,14 @@ public class Ball {
 		@param speed velocidade da bola (em pixels por millisegundo).
 	*/
 
-	double cx;
-	double cy;
-	double width;
-	double height;
-	Color color;
-	double speedX;
-	double speedY;
-	String lastCollisionId;
+	private double cx;
+	private double cy;
+	private double width;
+	private double height;
+	private Color color;
+	private double speedX;
+	private double speedY;
+	private String lastCollisionId;
 
 	public Ball(double cx, double cy, double width, double height, Color color, double speed) {
 		this.cx = cx;
